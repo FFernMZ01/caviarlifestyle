@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart - CaviarStore | Ecommerce Website Design</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="images/caviarlogo.jpg" width="200px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="account.html">Account</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </nav>
+            <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
+            <img src="images/menu.png" onclick="menutoggle()" class="menu-icon">
+        </div>
+    </div>
+
+    <div class="small-container cart-page">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="cartItems">
+                <!-- Cart items will be injected here by JavaScript -->
+            </tbody>
+        </table>
+
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td id="subtotal">₱0.00</td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td id="tax">₱0.00</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td id="total">₱0.00</td>
+                </tr>
+            </table>
+        </div>
+        <div class="total-price">
+            <a href="checkout.html" target="_blank" class="btn">Proceed to checkout &#8594;</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col1">
+                </div>
+                <div class="footer-col2">
+                    <img src="images/caviarlogo.jpg">
+                    <p>Unleash your inner style icon and embrace the streets with Caviar Streetwear – where every piece is a statement, and every street is your runway.</p>
+                </div>
+                <div class="footer-col3">
+                </div>
+                <div class="footer-col4">
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderCart();
+        });
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                const itemSubtotal = parseFloat(item.price.replace('₱', '')) * item.quantity;
+                subtotal += itemSubtotal;
+
+                cartItems.innerHTML += `
+                    <tr>
+                        <td>
+                            <div class="cart-info">
+                                <img src="${item.image}" width="50">
+                                <div>
+                                    <p>${item.name}</p>
+                                    <small>Price: ${item.price}</small><br>
+                                </div>
+                            </div>
+                        </td>
+                        <td><input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)"></td>
+                        <td>₱${itemSubtotal.toFixed(2)}</td>
+                        <td><button onclick="removeItem(${index})">Remove</button></td>
+                    </tr>
+                `;
+            });
+
+            const tax = subtotal * 0.12;
+            const total = subtotal + tax;
+
+            document.getElementById('subtotal').innerText = `₱${subtotal.toFixed(2)}`;
+            document.getElementById('tax').innerText = `₱${tax.toFixed(2)}`;
+            document.getElementById('total').innerText = `₱${total.toFixed(2)}`;
+        }
+
+        function updateQuantity(index, quantity) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart[index].quantity = parseInt(quantity);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        }
+    </script>
+</body>
+</html>
+
+

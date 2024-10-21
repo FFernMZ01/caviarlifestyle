@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products - CaviarStore | Ecommerce Website Design</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .product-img {
+            width: 100%;
+            max-width: 200px; /* Adjust this value as needed */
+            height: auto;
+            cursor: pointer; /* Add cursor pointer to indicate clickable images */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="images/caviarlogo.jpg" width="200px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="account.html">Account</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </nav>
+            <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
+            <img src="images/menu.png" onclick="menutoggle()" class="menu-icon">
+        </div>
+    </div>
+    <!----------------- title -------------->
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>All Products</h2>
+            <select id="sortOptions" onchange="sortProducts()">
+                <option value="default">Default Sorting</option>
+                <option value="priceLowHigh">Price: Low to High</option>
+                <option value="priceHighLow">Price: High to Low</option>
+                <option value="ratingLowHigh">Rating: Low to High</option>
+                <option value="ratingHighLow">Rating: High to Low</option>
+            </select>
+        </div>
+
+        <div class="row" id="products">
+            <div class="col-4" data-price="800" data-rating="5">
+                <img src="images/herloss.png" class="product-img" onclick="storeProductDetails('Herloss', 'images/herloss.png', '₱800.00')">
+                <h4>Herloss</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <p>₱800.00</p>
+            </div>
+            <!-- Add other products here, with appropriate data-price and data-rating attributes -->
+            <div class="col-4" data-price="500" data-rating="4">
+                <img src="images/lifeofpablo.png" class="product-img" onclick="storeProductDetails('Life of Pablo', 'images/lifeofpablo.png', '₱500.00')">
+                <h4>Life of Pablo</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>₱500.00</p>
+            </div>
+            <div class="col-4" data-price="700" data-rating="5">
+                <img src="images/pinktape.png" class="product-img" onclick="storeProductDetails('Pink Tape', 'images/pinktape.png', '₱700.00')">
+                <h4>Pink Tape</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <p>₱700.00</p>
+            </div>
+            <div class="col-4" data-price="600" data-rating="4">
+                <img src="images/takecare.png" class="product-img" onclick="storeProductDetails('Take Care', 'images/takecare.png', '₱600.00')">
+                <h4>Take Care</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>₱600.00</p>
+            </div>
+            <div class="col-4" data-price="200" data-rating="5">
+                <img src="images/ed&eddy.png" class="product-img" onclick="storeProductDetails('Ed & Eddy', 'images/ed&eddy.png', '₱200.00')">
+                <h4>Ed & Eddy</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <p>₱200.00</p>
+            </div>
+            <div class="col-4" data-price="200" data-rating="4">
+                <img src="images/grimreaper.png" class="product-img" onclick="storeProductDetails('Grim Reaper', 'images/grimreaper.png', '₱200.00')">
+                <h4>Grim Reaper</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>₱200.00</p>
+            </div>
+            <div class="col-4" data-price="500" data-rating="4">
+                <img src="images/dawnfm.png" class="product-img" onclick="storeProductDetails('Dawn FM', 'images/dawnfm.png', '₱500.00')">
+                <h4>Dawn FM</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>₱500.00</p>
+            </div>
+            <div class="col-4" data-price="900" data-rating="5">
+                <img src="images/clb.png" class="product-img" onclick="storeProductDetails('CLB', 'images/clb.png', '₱900.00')">
+                <h4>CLB</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <p>₱900.00</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="page-btn">
+                <span>1</span>
+            </div>
+        </div>
+    </div>
+
+    <!----------Footer--------------->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col1"></div>
+                <div class="footer-col2">
+                    <img src="images/caviarlogo.jpg">
+                    <p>Unleash your inner style icon and embrace the streets with Caviar Streetwear – where every piece is a statement, and every street is your runway.</p>
+                </div>
+                <div class="footer-col3"></div>
+                <div class="footer-col4"></div>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <script>
+        function storeProductDetails(name, image, price) {
+            const product = {
+                name: name,
+                image: image,
+                price: price
+            };
+            localStorage.setItem('selectedProduct', JSON.stringify(product));
+            window.location.href = 'product-details.html';
+        }
+
+        function sortProducts() {
+            const sortOption = document.getElementById("sortOptions").value;
+            const productsContainer = document.getElementById("products");
+            const products = Array.from(productsContainer.getElementsByClassName("col-4"));
+
+            products.sort((a, b) => {
+                const priceA = parseFloat(a.getAttribute("data-price"));
+                const priceB = parseFloat(b.getAttribute("data-price"));
+                const ratingA = parseFloat(a.getAttribute("data-rating"));
+                const ratingB = parseFloat(b.getAttribute("data-rating"));
+
+                switch (sortOption) {
+                    case "priceLowHigh":
+                        return priceA - priceB;
+                    case "priceHighLow":
+                        return priceB - priceA;
+                    case "ratingLowHigh":
+                        return ratingA - ratingB;
+                    case "ratingHighLow":
+                        return ratingB - ratingA;
+                    default:
+                        return 0;
+                }
+            });
+
+            productsContainer.innerHTML = "";
+            products.forEach(product => productsContainer.appendChild(product));
+        }
+    </script>
+</body>
+</html>

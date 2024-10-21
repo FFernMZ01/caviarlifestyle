@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - CaviarStore</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="images/caviarlogo.jpg" width="200px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="account.html">Account</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </nav>
+            <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
+            <img src="images/menu.png" onclick="menutoggle()" class="menu-icon">
+        </div>
+    </div>
+
+    <div class="small-container single-product">
+        <div class="row">
+            <div class="col-2">
+                <img src="" width="100%" id="productImg">
+            </div>
+            <div class="col-2">
+                <p>Home / Product</p>
+                <h1 id="productName"></h1>
+                <h4 id="productPrice"></h4>
+                <input type="number" value="1" id="productQuantity">
+                <button class="btn" onclick="addToCart()">Add to Cart</button>
+                <h3>Product Details <i class="fa fa-indent"></i></h3>
+                <br>
+                <p id="productDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum erat libero, pulvinar tincidunt leo consectetur eget.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col1">
+                </div>
+                <div class="footer-col2">
+                    <img src="images/caviarlogo.jpg">
+                    <p>Unleash your inner style icon and embrace the streets with Caviar Streetwear – where every piece is a statement, and every street is your runway.</p>
+                </div>
+                <div class="footer-col3">
+                </div>
+                <div class="footer-col4">
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const product = JSON.parse(localStorage.getItem('selectedProduct'));
+            if (product) {
+                document.getElementById('productName').innerText = product.name;
+                document.getElementById('productImg').src = product.image;
+                document.getElementById('productPrice').innerText = product.price;
+            }
+        });
+
+        function addToCart() {
+            const product = JSON.parse(localStorage.getItem('selectedProduct'));
+            const quantity = parseInt(document.getElementById('productQuantity').value);
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProductIndex = cart.findIndex(item => item.name === product.name);
+
+            if (existingProductIndex !== -1) {
+                cart[existingProductIndex].quantity += quantity;
+            } else {
+                cart.push({ ...product, quantity });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.location.href = 'cart.html';
+        }
+    </script>
+</body>
+</html>
+

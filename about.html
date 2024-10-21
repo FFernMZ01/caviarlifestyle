@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | CaviarStore</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+   
+   <div class="header">
+       <div class="container">
+          <div class="navbar">
+              <div class="logo">
+                  <a href="index.html"><img src="images/caviarlogo.jpg" width="200px"></a>
+              </div>
+              <nav>
+               <ul id="MenuItems">
+                   <li><a href="index.html">Home</a></li>
+                   <li><a href="products.html">Products</a></li>
+                   <li><a href="about.html">About</a></li>
+                   <li><a href="contact.html">Contact</a></li>
+                   <li><a href="account.html">Account</a></li>
+                   <li><a href="checkout.html">Checkout</a></li>
+               </ul>
+              </nav>
+              <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
+              <img src="images/menu.png" onclick="menutoggle()" class="menu-icon">
+          </div>
+           <div class="row">
+                <div class="col-2">
+                    <h1>About Us</h1>
+                    <p>Welcome to Caviar Streetwear, where fashion meets passion and style speaks volumes.</p>
+                </div>
+                <div class="col-2">
+                    <img src="images/aboutus.png">
+                </div>
+           </div>
+       </div>
+    </div>
+
+<!------------------ About Us Section --------------->
+<div class="about-us">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-2">
+                <h2>Our Story</h2>
+                <p>Caviar Streetwear started with a simple idea: to create unique, high-quality streetwear that stands out from the crowd. Founded by a group of passionate fashion enthusiasts, we aim to bring fresh and bold designs to fashion-forward individuals.</p>
+            </div>
+            <div class="col-2">
+                <img src="images/caviarlogo.jpg" alt="Our Story">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <img src="images/1.png" alt="Our Mission">
+            </div>
+            <div class="col-2">
+                <h2>Our Mission</h2>
+                <p>Our mission is to empower people to express their individuality through fashion. We believe that what you wear is an extension of who you are, and we strive to create pieces that make a statement and turn heads.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <h2>Our Values</h2>
+                <p>We value creativity, quality, and authenticity. Every piece in our collection is designed with meticulous attention to detail and crafted to the highest standards. We are committed to pushing the boundaries of streetwear fashion and delivering exceptional value to our customers.</p>
+            </div>
+            <div class="col-2">
+                <img src="images/pinktape.png" alt="Our Values">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!----------Footer---------------> 
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col1">
+            </div>
+            <div class="footer-col2">
+               <a href="#"><img src="images/caviarlogo.jpg"></a>
+            <p>Unleash your inner style icon and embrace the streets with Caviar Streetwear – where every piece is a statement, and every street is your runway.</p>
+            </div>
+            <div class="footer-col3">
+            </div>
+            <div class="footer-col4">
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+
+<!-------------js for toggle menu-------------->
+
+<script>
+    var MenuItems = document.getElementById("MenuItems");
+    
+    MenuItems.style.maxHeight = "0px";
+    
+    function menutoggle() {
+        if(MenuItems.style.maxHeight == "0px") {
+            MenuItems.style.maxHeight = "200px";
+        } else {
+            MenuItems.style.maxHeight = "0px";
+        }
+    }
+</script>
+</body>
+</html>

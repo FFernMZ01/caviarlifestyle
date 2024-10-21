@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - CaviarStore | Ecommerce Website Design</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Popup styling */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            text-align: center;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .popup-overlay.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="images/caviarlogo.jpg" width="200px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+            <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
+            <img src="images/menu.png" onclick="menutoggle()" class="menu-icon">
+        </div>
+    </div>
+
+    <div class="small-container">
+        <h2>Checkout</h2>
+        <div class="row">
+            <div class="col-2">
+                <h3>Order Summary</h3>
+                <div id="orderSummary">
+                    <!-- Order summary will be injected here by JavaScript -->
+                </div>
+            </div>
+            <div class="col-2">
+                <h3>Payment Information</h3>
+                <form id="paymentForm">
+                    <label for="cardName">Name on Card</label>
+                    <input type="text" id="cardName" name="cardName" required>
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" name="cardNumber" required>
+                    <label for="expMonth">Expiration Month</label>
+                    <input type="text" id="expMonth" name="expMonth" required>
+                    <label for="expYear">Expiration Year</label>
+                    <input type="text" id="expYear" name="expYear" required>
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" required>
+                    <button type="submit" class="btn">Submit Payment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col1">
+                </div>
+                <div class="footer-col2">
+                    <img src="images/caviarlogo.jpg">
+                    <p>Unleash your inner style icon and embrace the streets with Caviar Streetwear – where every piece is a statement, and every street is your runway.</p>
+                </div>
+                <div class="footer-col3">
+                </div>
+                <div class="footer-col4">
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <!-- Popup and Overlay -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="popup">
+        <p id="popupText">Verifying...</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderOrderSummary();
+        });
+
+        function renderOrderSummary() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const orderSummary = document.getElementById('orderSummary');
+            orderSummary.innerHTML = '';
+
+            let subtotal = 0;
+
+            cart.forEach((item) => {
+                const itemSubtotal = parseFloat(item.price.replace('₱', '')) * item.quantity;
+                subtotal += itemSubtotal;
+
+                orderSummary.innerHTML += `
+                    <div class="order-item">
+                        <p>${item.name}</p>
+                        <small>Price: ${item.price} x ${item.quantity}</small>
+                        <p>Subtotal: ₱${itemSubtotal.toFixed(2)}</p>
+                    </div>
+                    <hr>
+                `;
+            });
+
+            const tax = subtotal * 0.12;
+            const total = subtotal + tax;
+
+            orderSummary.innerHTML += `
+                <div class="order-total">
+                    <p>Subtotal: ₱${subtotal.toFixed(2)}</p>
+                    <p>Tax: ₱${tax.toFixed(2)}</p>
+                    <p>Total: ₱${total.toFixed(2)}</p>
+                </div>
+            `;
+        }
+
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showPopup();
+        });
+
+        function showPopup() {
+            const popup = document.getElementById('popup');
+            const popupOverlay = document.getElementById('popupOverlay');
+            const popupText = document.getElementById('popupText');
+
+            popup.classList.add('active');
+            popupOverlay.classList.add('active');
+
+            popupText.textContent = 'Verifying...';
+
+            setTimeout(() => {
+                popupText.textContent = 'Payment successful!';
+                setTimeout(() => {
+                    popup.classList.remove('active');
+                    popupOverlay.classList.remove('active');
+                    // Redirect to index.html
+                    window.location.href = 'index.html';
+                }, 2000); // 2 seconds delay for redirection
+            }, 2000); // 2 seconds delay for "Verifying..."
+        }
+    </script>
+</body>
+</html>
+
